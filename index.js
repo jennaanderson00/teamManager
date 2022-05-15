@@ -52,8 +52,8 @@ function App() {
         name: 'menuList1',
         message: 'Please select an option from the list below to proceed.',
         choices: ['Add an engineer or intern', 'Finish building team'],
-        when: ({ mgrOfficeNum }, { egrGitHub }, { intSchool }) => {
-            if (mgrOfficeNum || egrGitHub || intSchool) {
+        when: ({ mgrOfficeNum }, { egrGitHub }, { intSchool }, { finishConfirm }) => {
+            if (mgrOfficeNum || egrGitHub || intSchool || finishConfirm === false) {
                 return true;
             } else {
                 return false;
@@ -193,7 +193,7 @@ const writeFile = fileContent => {
             }
             resolve({
                 ok: true,
-                message: 'File created!'
+                message: 'HTML created! Open dist/teamSite.html to view your custom team page.'
             });
         });
     });
@@ -207,3 +207,5 @@ App()
 .then(generateHtml => {
     return writeFile(generateHtml);
 });
+
+module.exports = App;
